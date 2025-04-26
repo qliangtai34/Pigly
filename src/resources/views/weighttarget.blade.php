@@ -13,7 +13,7 @@
         target_weight
       </th>
       <td>
-        <input type="text" name="target_weight" value="{{$weighttarget->target_weight}}">
+        <input type="text" name="target_weight" value="{{$weighttarget->target_weight}}">kg
       </td>
     </tr>
 

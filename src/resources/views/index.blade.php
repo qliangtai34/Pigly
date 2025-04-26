@@ -1,81 +1,63 @@
-@if ($weighttarget)
-    <td>{{$weighttarget->target_weight}}</td>
-@endif
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
 
+<div class="top__button">
+  <div class="goal_setting">
+   <a href="/wight_logs/goal_setting">目標体重設定</a>
+  </div>
+  
+  <form class="logoutbutton" action="/logout" method="post">
+   @csrf
+   <button class="header-nav__button">ログアウト</button>
+  </form>
+  
+</div>
+  
+<div class="whight__head">
+  <div class="weighttarget">
+    <div class="weighttarget__title">
+        <span class="form__label--item">目標体重</span>
+    </div>
+@if ($weighttarget)
+    <td>{{$weighttarget->target_weight}}kg</td>
+@endif
+  </div>
+  <div class="latestweightlog">
+    <div class="latestweightlog__title">
+       <span>最新体重</span>
+    </div>
 @if ($latestweightlog)
-    <td>{{$latestweightlog->weight}}</td>
+    <td>{{$latestweightlog->weight}}kg</td>
 @endif
-
-@if ($weighttarget)
-    <td>{{$weighttarget->target_weight - $latestweightlog->weight}}</td>
+  </div>
+  <div class="totargetweight">
+    <div>
+       <span>目標まで</span>
+    </div>
+@if ($latestweightlog)
+    <td>{{$weighttarget->target_weight - $latestweightlog->weight}}kg</td>
 @endif
+  </div>
+</div>
+    
 
-    <style>
-    .modal-checkbox {
-  display: none;
-}
+<div class=main>
 
-.modal-open-button {
-  padding: 10px 20px;
-  color: white;
-  cursor: pointer;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 5px;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0 0 0 / 60%);
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  transform: translate(50%, -50%);
-}
-
-.modal-wrapper {
-  position: relative;
-  width: 80%;
-  max-width: 500px;
-  max-height: 70%;
-  padding: 20px;
-  margin: auto;
-  overflow: scroll;
-  background-color: #FEFEFE;
-  border-radius: 5px;
-}
-
-.modal-content h1 {
-  margin: 0;
-  font-size: 4rem;
-  line-height: 1.2em;
-  letter-spacing: -0.02em;
-}
-
-.modal-checkbox:checked + .modal {
-  display: flex;
-}
-  </style>
+<div class="adddata">
 <label for="modalToggle" class="modal-open-button">データを追加</label>
 <input type="checkbox" id="modalToggle" class="modal-checkbox">
 <div class="modal" id="modal">
   <div class="modal-wrapper">
     <label for="modalToggle" class="close">&times;</label>
     <div class="modal-content">
-      <h1>Weight Logを追加</h1>
+      <h3>Weight Logを追加</h3>
       
 
 
@@ -83,7 +65,14 @@
   <table>
   @csrf
     <tr>
-      <th>date</th>
+      <th>
+        <span class="form__label--item">
+        日付
+        </span>
+        <span class="form__label--required">
+        必須
+        </span>
+      </th>
       <td><input type="text" name="date"></td>
     </tr>
     @if ($errors->has('date'))
@@ -94,8 +83,15 @@
     </tr>
     @endif   
     <tr>
-      <th>weight</th>
-      <td><input type="text" name="weight"></td>
+      <th>
+        <span class="form__label--item">
+        体重
+        </span>
+        <span class="form__label--required">
+        必須
+        </span>
+      </th>
+      <td><input type="text" name="weight"><div class="kg">kg</div></td>
     </tr>
     @if ($errors->has('weight'))
     <tr>
@@ -105,8 +101,15 @@
     </tr>
     @endif   
     <tr>
-      <th>calories</th>
-      <td><input type="text" name="calories"></td>
+      <th>
+        <span class="form__label--item">
+        摂取カロリー
+        </span>
+        <span class="form__label--required">
+        必須
+        </span>
+      </th>
+      <td><input type="text" name="calories"><div class="cal">cal</div></td>
     </tr>
     @if ($errors->has('calories'))
     <tr>
@@ -116,7 +119,14 @@
     </tr>
     @endif
     <tr>
-      <th>exercise_time</th>
+      <th>
+        <span class="form__label--item">
+        運動時間
+        </span>
+        <span class="form__label--required">
+        必須
+        </span>
+      </th>
       <td><input type="text" name="exercise_time"></td>
     </tr>
     @if ($errors->has('exercise_time'))
@@ -127,7 +137,11 @@
     </tr>
     @endif
     <tr>
-      <th>exercise_content</th>
+      <th>
+        <span class="form__label--item">
+        運動内容
+        </span>
+      </th>
       <td><textarea name="exercise_content" id=""></textarea></td>
     </tr>
     @if ($errors->has('exercise_content'))
@@ -145,49 +159,62 @@
   </table>
 </form>
 
+      </div>
     </div>
   </div>
 </div>
+    
+      
+    
 
-    <td>
-      <a href="/wight_logs/goal_setting">目標体重設定</a>
-    </td>
 
-</br>
+<table class="weightlogtable">
+
+  <tr>
+    <th>日付</th>
+    <th>体重</th>
+    <th>食事摂取カロリー</th>
+    <th>運動時間</th>
+  </tr>
 @foreach ($weightlogs as $weightlog)
   <tr>
-    <td>{{$weightlog->id}}</td>
+    
     <td>{{$weightlog->date}}</td>
-    <td>{{$weightlog->weight}}</td>
-    <td>{{$weightlog->calories}}</td>
-    <td>{{$weightlog->exercise_time}}</td>
-    <td>{{$weightlog->exercise_content}}</td>
+    <td>{{$weightlog->weight}}kg</td>
+    <td>{{$weightlog->calories}}cal</td>
+    <td>{{ \Carbon\Carbon::parse($weightlog->exercise_time)->format('H:i') }}</td>
+    
     <td>
-      <a href="/weight_logs/{{$weightlog->id}}">アンカーテキスト</a>
+      <a href="/weight_logs/{{$weightlog->id}}">
+        <button type="submit">✏</button>
+      </a>
     </td>
+    <td>
     <div class="hover-target">
     Hover Me
     <div class="hover-modal">
       <h3>Sample</h3>
-    <td>{{$weightlog->id}}</td>
-    <td>{{$weightlog->date}}</td>
-    <td>{{$weightlog->weight}}</td>
-    <td>{{$weightlog->calories}}</td>
-    <td>{{$weightlog->exercise_time}}</td>
-    <td>{{$weightlog->exercise_content}}</td>
-    <td>
+    {{$weightlog->id}} </br>
+    {{$weightlog->date}} </br>
+    {{$weightlog->weight}} </br>
+    {{$weightlog->calories}} </br>
+    {{$weightlog->exercise_time}} </br>
+    {{$weightlog->exercise_content}} </br>
+    
       <a href="/weight_logs/{{$weightlog->id}}">アンカーテキスト</a>
-    </td>
+    
     </div>
   </div>
+</td>
   </tr>
-  </br>
+  
 @endforeach
+</table>
 
-<form class="form" action="/logout" method="post">
-  @csrf
-  <button class="header-nav__button">ログアウト</button>
-</form>
+<div class="paginate">
+{{ $weightlogs->links() }}
+</div>
+
 
 <form class="search-form" action="/todos/search" method="get">
   @csrf
@@ -196,37 +223,7 @@
     <button type="submit">検索</button>
 </form>
 
+</div>
 
-<style>
-    
-
-    .hover-target {
-      display: inline-block;
-      background: #3498db;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .hover-modal {
-      display: none;
-      position: absolute;
-      top: 120%;
-      left: 150%;
-      transform: translateX(-50%);
-      background: white;
-      color: black;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      width: 300px;
-      z-index: 100;
-    }
-
-    .hover-target:hover .hover-modal {
-      display: block;
-    }
-  </style>
-</head>
+</body>
+</html>

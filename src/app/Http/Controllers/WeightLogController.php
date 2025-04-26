@@ -13,8 +13,8 @@ class WeightLogController extends Controller
 {
     public function index()
     {
-        $weightlogs = WeightLog::all();
-        $latestweightlog = WeightLog::latest()->first();
+        $weightlogs = WeightLog::Paginate(8);
+        $latestweightlog = WeightLog::latest('date')->first();
         $weighttarget = WeightTarget::latest()->first();
         return view('index', compact('weightlogs', 'latestweightlog', 'weighttarget'));
     }
@@ -43,7 +43,7 @@ class WeightLogController extends Controller
         return view('update', compact('weightlogs'));
     }
 
-    public function update(Request $request)
+    public function update(WeightLogRequest $request)
     {
         $form = $request->all();
         unset($form['_token']);
@@ -51,7 +51,7 @@ class WeightLogController extends Controller
         return redirect('/');
     }
 
-    public function search(Request $request)
+    public function search(WeightLogRequest $request)
 {
     $query = WeightLog::KeywordSearch($request->keyword);
 
@@ -65,8 +65,9 @@ class WeightLogController extends Controller
 
     $weightlogs = $query->orderBy('date', 'desc')->get();
     $latestweightlog = WeightLog::latest()->first();
+    $weighttarget = WeightTarget::latest()->first();
 
-    return view('index', compact('weightlogs', 'latestweightlog'));
+    return view('index', compact('weightlogs', 'latestweightlog', 'weighttarget'));
 }
 
     public function weighttarget(Request $request)

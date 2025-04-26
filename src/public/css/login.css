@@ -1,7 +1,9 @@
 .login-form__content {
     margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
+    padding: 40px 0px 50px;
+    max-width: 500px;
+    margin-top: 40px;
+    background-color: white;
 }
 
 .login-form__heading {
@@ -11,7 +13,7 @@
 
 .form {
     margin: 0 auto;
-    width: 25%;
+    width: 100%;
     text-align: center;
 }
 
@@ -20,23 +22,28 @@
 }
 
 .form__group-title {
+    margin: 0 auto;
     text-align: left;
+    width: 450px;
+    height: 25px;
 }
 
 .form__error {
-    height: 20px;
+    margin: 0 auto;
+    height: 30px;
     color: #ff0000;
     text-align: left;
+    width: 500px;
 }
 
 .form__input--text input {
     padding: 10px;
-    width: 100%;
+    width: 450px;
     height: 40px;
     border: 1px solid #ddd;
     border-radius: 3px;
-
     appearance: none;
+    margin: 0 auto;
 }
 
 .form__button {
