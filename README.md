@@ -19,7 +19,7 @@
 - PHP 8.0 Laravel 8.0 MySQL 8.0
 
 ## ER図
-<img src="ER.png" width="200">
+<img src="ER.png" width="400">
 
 ## URL
 
