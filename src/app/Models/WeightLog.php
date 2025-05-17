@@ -11,11 +11,9 @@ class WeightLog extends Model
 
     protected $fillable = ['date', 'weight', 'calories', 'exercise_time', 'exercise_content', 'user_id'];
 
-    public function scopeKeywordSearch($query, $keyword)
+    public function user()
 {
-  if (!empty($keyword)) {
-    $query->where('date', 'like', '%' . $keyword . '%');
-  }
+    return $this->belongsTo(User::class);
 }
 
 }

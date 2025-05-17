@@ -211,9 +211,7 @@
 @endforeach
 </table>
 
-<div class="paginate">
-{{ $weightlogs->links() }}
-</div>
+
 
 
 <form class="search-form" action="/todos/search" method="get">
